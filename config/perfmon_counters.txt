@@ -1,0 +1,38 @@
+\.NET CLR Data(*)\*
+\.NET CLR Exceptions(*)\*
+\.NET CLR Interop(*)\*
+\.NET CLR Jit(*)\*
+\.NET CLR Loading(*)\*
+\.NET CLR LocksAndThreads(*)\*
+\.NET CLR Memory(*)\*
+\.NET CLR Networking 4.0.0.0(*)\*
+\.NET CLR Networking(*)\*
+\.NET CLR Remoting(*)\*
+\.NET CLR Security(*)\*
+\.NET Data Provider for MySQL\*
+\.NET Data Provider for Oracle(*)\*
+\.NET Data Provider for SqlServer(*)\*
+\Active Server Pages\*
+\APP_POOL_WAS(*)\*
+\ASP.NET Apps v2.0.50727(*)\*
+\ASP.NET Apps v4.0.30319(*)\*
+\ASP.NET State Service\*
+\ASP.NET v2.0.50727\*
+\ASP.NET v4.0.30319\*
+\ASP.NET\*
+\HTTP Service Request Queues(*)\*
+\HTTP Service Url Groups(*)\*
+\HTTP Service\*
+\ServiceModelEndpoint 3.0.0.0(*)\*
+\ServiceModelEndpoint 4.0.0.0(*)\*
+\ServiceModelOperation 3.0.0.0(*)\*
+\ServiceModelOperation 4.0.0.0(*)\*
+\ServiceModelService 3.0.0.0(*)\*
+\ServiceModelService 4.0.0.0(*)\*
+\SMSvcHost 4.0.0.0\*
+\W3SVC_W3WP(*)\*
+\WAS_W3WP(*)\*
+\Web Service Cache\*
+\Web Service(*)\*
+\WF (System.Workflow) 4.0.0.0(*)\*
+\WorkflowServiceHost 4.0.0.0(*)\*
