@@ -24,8 +24,7 @@ module PerfmonAgent
       if File.file?(counters_file)
         @counters = Array.new
         clines = File.open(counters_file, "r")
-        clines.each { |l| l.gsub!(/[\n]+/, "\n")
-          if !l.chr.eql?("#") && !l.chr.eql?("\n") then @counters << l.strip end }
+        clines.each { |l| if !l.chr.eql?("#") && !l.chr.eql?("\n") then @counters << l.strip end }
         clines.close
       else abort("No Perfmon counters file named #{counters_file}.") end
 
