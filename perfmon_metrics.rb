@@ -1,8 +1,10 @@
 class PerfmonMetrics 
-  attr_accessor :metric_types, :metric_samples
+  attr_accessor :metric_types, :metric_samples, :typeperf_error_msg
   
   def initialize
     @metric_samples = 1
+    @typeperf_error_msg = "Error: No valid counters."
+    
     @metric_types = Hash.new("ms")
     @metric_types["% 401 HTTP Response Sent"] = "%"
     @metric_types["% 403 HTTP Response Sent"] = "%"
