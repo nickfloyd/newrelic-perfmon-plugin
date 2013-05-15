@@ -5,8 +5,7 @@ newrelic:
   #
   # Update with your New Relic account license key:
   #
-  license_key: 'e7b3d85ce615a352af9cf55aa0dcae67d05a2076'
-
+  license_key: '6500043eb702036e5810aed3ed1d2ab117409b72'
   #
   # Set to '1' for verbose output, remove for normal output.
   # All output goes to stdout/stderr.
@@ -19,7 +18,7 @@ agents:
   perfmon:
       -
         local: yes
-        hostname: stocktrader
+        hostname: nickwin8vm
         countersfile: perfmon_counters.txt
         # Set "debug: true" to see metrics in stdout instead of sent to New Relic"
         debug: false

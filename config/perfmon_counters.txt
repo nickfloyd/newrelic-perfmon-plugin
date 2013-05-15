@@ -14,11 +14,9 @@
 \.NET Data Provider for SqlServer(*)\*
 \Active Server Pages\*
 \APP_POOL_WAS(*)\*
-\ASP.NET Apps v2.0.50727(*)\*
 \ASP.NET Apps v4.0.30319(*)\*
-\ASP.NET State Service\*
-\ASP.NET v2.0.50727\*
 \ASP.NET v4.0.30319\*
+\ASP.NET State Service\*
 \ASP.NET\*
 \HTTP Service Request Queues(*)\*
 \HTTP Service Url Groups(*)\*
@@ -36,3 +34,8 @@
 \Web Service(*)\*
 \WF (System.Workflow) 4.0.0.0(*)\*
 \WorkflowServiceHost 4.0.0.0(*)\*
+
+# Typeperf hangs (or is just very slow) when retrieving these counters. 
+# Uncomment these if you want ASP.NET 2.0-specific counters.
+# \ASP.NET Apps v2.0.50727(*)\*
+# \ASP.NET v2.0.50727\*

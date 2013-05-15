@@ -22,49 +22,56 @@ module PerfmonAgent
       else counters_file = "config/#{self.countersfile}" end
       
       if File.file?(counters_file)
-        @counters = "typeperf"
+        @counters = Array.new
         clines = File.open(counters_file, "r")
-        clines.each { |l| if !?l.chr.eql?("#") then @counters = "#{@counters} \"#{l.strip}\"" end }
+        clines.each { |l| if !l.chr.eql?("#") && !l.chr.eql?("\n") then @counters << l.strip end }
         clines.close
-        if !self.local then @counters = "#{@counters} -s #{self.hostname}" end
-        @counters = "#{@counters} -sc #{@pm.metric_samples}"
       else abort("No Perfmon counters file named #{counters_file}.") end
+
+      if !self.local then @typeperf_string = "-s #{self.hostname} -sc #{@pm.metric_samples}"
+      else @typeperf_string = "-sc #{@pm.metric_samples}" end
     end
     
     def poll_cycle
-
-      if self.testrun then perf_input = File.open("typeperf_test.txt", "r")
-      else perf_input = `#{@counters}`.split("\n") end
-      
-      perf_lines = Array.new  
-      perf_input.each {|pl| if pl.chr.eql?("\"") 
-        perf_lines << pl.gsub(/\"/, "").gsub(/\[/, "(").gsub(/\]/, ")").gsub(/\\\\\w+\\/, "") end }
-      
-      if self.testrun then perf_input.close end
-      
-      perf_names = perf_lines[0].split(",")
-      perf_values = perf_lines[1].split(",")
-      
-      perf_names.each_index{ |i|
-        if !perf_names[i].rindex("\\").nil?
-          metric_name = perf_names[i].slice(perf_names[i].rindex("\\")+1, perf_names[i].length)
-          report_metric_check_debug perf_names[i].strip, @pm.metric_types[metric_name], perf_values[i]
-        end     
-      }
-      
-      if self.testrun then exit end
+      if self.testrun 
+        perf_input = File.open("typeperf_test.txt", "r")
+        get_perf_data(perf_input)
+        perf_input.close
+        exit
+      else 
+        perf_threads = []
+        @counters.each { |c| perf_threads << Thread.new(c) { |cthread|
+            perf_input = `typeperf \"#{cthread}\" #{@typeperf_string}`
+            if !perf_input.include? @pm.typeperf_error_msg then get_perf_data(perf_input.split("\n"))
+            elsif self.debug then puts("This path has no valid counters: #{cthread}") end
+        } }
+        perf_threads.each { |t| t.join }
+      end
     end
     
     private
     
+    def get_perf_data(perf_input)
+      perf_lines = Array.new  
+      perf_input.each { |pl| if pl.chr.eql?("\"") 
+        perf_lines << pl.gsub(/\"/, "").gsub(/\[/, "(").gsub(/\]/, ")").gsub(/\\\\\w+\\/, "") end }
+      perf_names = perf_lines[0].split(",")
+      perf_values = perf_lines[1].split(",")
+      perf_names.each_index{ |i| 
+        if !perf_names[i].rindex("\\").nil?
+          metric_name = perf_names[i].slice(perf_names[i].rindex("\\")+1, perf_names[i].length)
+          report_metric_check_debug perf_names[i].strip, @pm.metric_types[metric_name], perf_values[i]
+        end }
+    end
+  
     def report_metric_check_debug(metricname, metrictype, metricvalue)
-      if "#{self.debug}" == "true" then puts("#{metricname}[#{metrictype}] : #{metricvalue}")
+      if self.debug then puts("#{metricname}[#{metrictype}] : #{metricvalue}")
       else report_metric metricname, metrictype, metricvalue end
     end
-    
-  end
+  
+  end 
   
   NewRelic::Plugin::Setup.install_agent :perfmon, self
   NewRelic::Plugin::Run.setup_and_run
-
+  
 end
