@@ -9,7 +9,7 @@ module PerfmonAgent
   class Agent < NewRelic::Plugin::Agent::Base
 
     agent_config_options :local, :hostname, :countersfile, :debug, :testrun
-    agent_guid "com.newrelic.examples.perfmon"
+    agent_guid "com.52projects.plugins.perfmon"
     agent_version "0.0.1"
 
     if !:hostname.empty? then agent_human_labels("Perfmon") { "#{hostname}" }

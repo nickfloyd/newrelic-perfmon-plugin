@@ -1,7 +1,7 @@
 newrelic-perfmon-plugin
 ================================
 
-New Relic Perfmon Plugin
+Perfmon Plugin for New Relic RPM
 
 ### Prerequisites
 

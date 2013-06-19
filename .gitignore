@@ -1,2 +1,7 @@
+info
+hooks
+info
+
 #ignore custom config
 config/newrelic_plugin.yml
+
