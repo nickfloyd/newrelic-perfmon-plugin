@@ -1,4 +1,4 @@
-perfmon_plugin
+newrelic-perfmon-plugin
 ================================
 
 New Relic Perfmon Plugin
