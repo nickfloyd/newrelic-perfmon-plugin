@@ -11,7 +11,7 @@ Perfmon Plugin for New Relic RPM
 
 ### Instructions for running the Plugin
 
-1. Verify that the "typeperf" command is available at your Windows command line. ex. `typepref "\Processor(_Total)\% Processor Time"`
+1. Verify that the "typeperf" command is available at your Windows command line. ex. `typeperf "\Processor(_Total)\% Processor Time"`
 2. Go to: https://github.com/newrelic-platform/perfmon_plugin.git
 3. Download and extract the source to a local directory
 4. Run `bundle install` in the directory with this source
