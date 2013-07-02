@@ -9,6 +9,9 @@ module PerfmonAgent
   class Agent < NewRelic::Plugin::Agent::Base
 
     agent_config_options :local, :hostname, :countersfile, :debug, :testrun
+
+    # Change the following agent_guid if you fork and use this as your own plugin
+    # Visit https://newrelic.com/docs/plugin-dev/ for more information
     agent_guid "com.52projects.plugins.perfmon"
     agent_version "0.0.1"
 
