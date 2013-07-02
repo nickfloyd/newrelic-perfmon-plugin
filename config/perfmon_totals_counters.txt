@@ -1,0 +1,28 @@
+\.NET CLR Data(_Global_)\*
+\.NET CLR Exceptions(_Global_)\*
+\.NET CLR Interop(_Global_)\*
+\.NET CLR Jit(_Global_)\*
+\.NET CLR Loading(_Global_)\*
+\.NET CLR LocksAndThreads(_Global_)\*
+\.NET CLR Memory(_Global_)\*
+\.NET CLR Networking 4.0.0.0(_Global_)\*
+\.NET CLR Networking(_Global_)\*
+\.NET CLR Remoting(_Global_)\*
+\.NET CLR Security(_Global_)\*
+\.NET Data Provider for MySQL\*
+\.NET Data Provider for Oracle\*
+\.NET Data Provider for SqlServer\*
+\Active Server Pages\*
+\APP_POOL_WAS(_Total)\*
+\ASP.NET Apps v2.0.50727(__Total__)\*
+\ASP.NET v2.0.50727\*
+\ASP.NET Apps v4.0.30319(__Total__)\*
+\ASP.NET v4.0.30319\*
+\ASP.NET State Service\*
+\ASP.NET\*
+\HTTP Service\*
+\SMSvcHost 4.0.0.0\*
+\W3SVC_W3WP(_Total)\*
+\WAS_W3WP(_Total)\*
+\Web Service Cache\*
+\Web Service(_Total)\*
