@@ -57,7 +57,7 @@ module PerfmonAgent
     def get_perf_data(perf_input)
       perf_lines = Array.new  
       perf_input.each { |pl| if pl.chr.eql?("\"") 
-        perf_lines << pl.gsub(/\"/, "").gsub(/\[/, "(").gsub(/\]/, ")").gsub(/\\\\\w+\\/, "") end }
+        perf_lines << pl.gsub(/\"/, "").gsub(/\//," per ").gsub(/\s{2}/," ").gsub(/\[/, "(").gsub(/\]/,")").gsub(/\\\\[^\]+\\/,"").gsub(/\\/,"/") end }
       perf_names = perf_lines[0].split(",")
       perf_values = perf_lines[1].split(",")
       perf_names.each_index{ |i| 
