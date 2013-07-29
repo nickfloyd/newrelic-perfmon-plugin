@@ -18,8 +18,12 @@ module PerfmonAgent
     if !:hostname.empty? then agent_human_labels("Perfmon") { "#{hostname}" }
     elsif :local then agent_human_labels("Perfmon") { "#{Socket.gethostname}" }
     else abort("No hostname found or local is not set to true.") end
-      
-    def setup_metrics
+    
+    # Fixes SSL Connection Error in Windows execution of Ruby
+    # Based on fix described at: https://gist.github.com/fnichol/867550
+    ENV['SSL_CERT_FILE'] = File.expand_path(File.dirname(__FILE__)) + "/config/cacert.pem"
+             
+    def setup_metrics        
       @pm = PerfmonMetrics.new
       if :countersfile.empty? then counters_file = "config/perfmon_counters.txt"
       else counters_file = "config/#{self.countersfile}" end
