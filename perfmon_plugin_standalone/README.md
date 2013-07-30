@@ -1,6 +1,5 @@
-PerfMon Plugin for New Relic RPM
-Steps for Building Standalone Version
-(Standalone Executable and Windows Service)
+PerfMon Plugin for New Relic RPM - Building the Standalone version
+=========================
 
 Prerequisites
 --------------------
