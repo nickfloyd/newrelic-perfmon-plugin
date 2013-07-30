@@ -1,4 +1,4 @@
-PerfMon Plugin for New Relic RPM - Building the Standalone version
+Perfmon Plugin for New Relic RPM<br> How-To Build Standalone & Windows Service
 =========================
 
 Prerequisites
@@ -21,7 +21,7 @@ Prerequisites
 	* http://curl.haxx.se/ca/cacert.pem
 	* Based on fix described here: https://gist.github.com/fnichol/867550
 	
-Building the Standalone Executable
+Building the Standalone Version
 --------------------
 
 1. Download plugin to windows server
@@ -65,7 +65,7 @@ Building the Windows Service
 	* Check logs for any errors - normally they will be empty
 	* Verify metrics appear in RPM
 
-Packaging the Windows Service
+Packaging the Plugin
 --------------------
 The following files should be included in a ZIP of the standalone/service:
 
@@ -74,7 +74,7 @@ The following files should be included in a ZIP of the standalone/service:
 * Windows service .exe.config 
 * Windows service XML
 * Template YML file: config/template_newrelic_plugin.yml
-* (For Service only) Logs directory - can be empty, or put dummy file in there
+* (If including Windows Service) Logs directory - can be empty, or put dummy file in there
 	
 Notes / Tips
 --------------------
