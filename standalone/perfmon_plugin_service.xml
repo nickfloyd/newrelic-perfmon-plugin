@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<service>
+	<id>nr_perfmon</id>
+	<name>New Relic Perfmon Plugin</name>
+	<description>New Relic Perfmon Plugin</description>
+	<executable>%BASE%\perfmon_plugin_standalone.exe</executable>
+	<arguments/>
+	<!-- Requires WMI to work -->
+	<depends>Winmgmt</depends>
+	<logpath>%BASE%\logs</logpath>
+	<log mode="roll-by-size">
+		<sizeThreshold>1024</sizeThreshold>
+		<keepFiles>5</keepFiles>
+	</log>
+	<onfailure action="restart" delay="10 sec"/>
+	<onfailure action="restart" delay="10 sec"/>
+	<onfailure action="none" />
+</service>
