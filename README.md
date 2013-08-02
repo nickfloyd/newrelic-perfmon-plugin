@@ -3,6 +3,12 @@ newrelic-perfmon-plugin
 
 ### Perfmon Plugin for New Relic RPM
 
+Quick Download
+--------------------
+
+#### NOTE: When using this, please follow the directions below for [Standalone](README.md#standalone-version) or [Windows Service](README.md#windows-service-version).
+##### https://github.com/nickfloyd/newrelic-perfmon-plugin/blob/master/standalone/perfmon_plugin_standalone.zip
+
 Prerequisites
 --------------------
 
@@ -21,6 +27,7 @@ Instructions for running the Plugin
 ### Standalone Version
 1. Verify that the "typeperf" command is available at your Windows command line. ex. `typeperf "\Processor(_Total)\% Processor Time"`
 2. Download and extract the plugin to a local directory
+	* https://github.com/nickfloyd/newrelic-perfmon-plugin/blob/master/standalone/perfmon_plugin_standalone.zip
 3. Copy `config\template_newrelic_plugin.yml` to `config\newrelic_plugin.yml`
 4. Edit `config\newrelic_plugin.yml` and replace:
   	* `'YOUR_LICENSE_KEY_HERE'` with your New Relic license key (in ' ')
