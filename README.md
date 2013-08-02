@@ -21,11 +21,11 @@ Instructions for running the Plugin
 ### Standalone Version
 1. Verify that the "typeperf" command is available at your Windows command line. ex. `typeperf "\Processor(_Total)\% Processor Time"`
 2. Download and extract the plugin to a local directory
-	* https://github.com/nickfloyd/newrelic-perfmon-plugin/blob/standalone/standalone/perfmon_plugin_standalone.zip
 3. Copy `config\template_newrelic_plugin.yml` to `config\newrelic_plugin.yml`
 4. Edit `config\newrelic_plugin.yml` and replace:
   	* `'YOUR_LICENSE_KEY_HERE'` with your New Relic license key (in ' ')
 	* `your_sever_name_here` with the hostname of your Windows server from which you wish to collect Perfmon counters
+	* (optional) If your server is behind an HTTP proxy, uncomment and set the `proxy_host`, `proxy_user` and `proxy_pass` settings.
 5. Run `perfmon_plugin_standalone.exe`
 6. Go back to the Plugins list, after a brief period you will see an entry called 'Perfmon'
 
