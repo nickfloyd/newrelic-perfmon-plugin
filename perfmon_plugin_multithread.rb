@@ -8,31 +8,49 @@ module PerfmonAgent
 
   class Agent < NewRelic::Plugin::Agent::Base
     
-  agent_config_options :local, :hostname, :countersfile, :debug, :testrun
+  agent_config_options :local, :hostname, :debug, :testrun
 
     # Change the following agent_guid if you fork and use this as your own plugin
     # Visit https://newrelic.com/docs/plugin-dev/ for more information
-    agent_guid "com.52projects.plugins.perfmon"
+    default_guid = "com.52projects.plugins.perfmon"
+    $num_threads = 5
     agent_version "0.0.2"
+    
+  # Allow GUID to be set in config file under "newrelic" stanza
+  if NewRelic::Plugin::Config.config.newrelic['guid'].to_s.empty?
+    agent_guid default_guid
+  else
+    agent_guid NewRelic::Plugin::Config.config.newrelic['guid'].to_s
+  end
   
   agent_human_labels('Perfmon') do 
-    if hostname.to_s.length == 0
-    if local then "#{Socket.gethostname}"
-    else abort("No hostname defined.\nEnter \"hostname: [your_hostname]\" or \"local: true\" in newrelic_plugin.yml") end
-    else "#{hostname}" end
+    if hostname.to_s.empty?
+      if local then "#{Socket.gethostname}"
+      else abort("No hostname defined.\nEnter \"hostname: [your_hostname]\" or \"local: true\" in newrelic_plugin.yml") end
+    else 
+      "#{hostname}" 
+    end
   end
   
     # Fixes SSL Connection Error in Windows execution of Ruby
     # Based on fix found at: https://gist.github.com/fnichol/867550
     ENV['SSL_CERT_FILE'] = File.expand_path(File.dirname(__FILE__)) + "/config/cacert.pem"
-  
+    
     def setup_metrics
-     if countersfile.to_s.empty? then counters_file = File.expand_path(File.dirname(__FILE__)) + "/config/perfmon_totals_counters.txt"
-    else counters_file =  File.expand_path(File.dirname(__FILE__)) + "/config/#{countersfile}" end
+      countersfile = NewRelic::Plugin::Config.config.newrelic['countersfile'].to_s
+      if countersfile.to_s.empty? then counters_file = File.expand_path(File.dirname(__FILE__)) + "/config/perfmon_totals_counters.txt"
+      else counters_file =  File.expand_path(File.dirname(__FILE__)) + "/config/#{countersfile}" end
       if File.file?(counters_file)
-        @counters = Array.new
+        i = 0
+        @counters = Array.new($num_threads, "")
         clines = File.open(counters_file, "r")
-        clines.each { |l| if !l.chr.eql?("#") && !l.chr.eql?("\n") then @counters << l.strip end }
+        clines.each { |l|
+          j = i % $num_threads
+          if !l.chr.eql?("#") && !l.chr.eql?("\n") 
+            @counters[j] = "#{@counters[j]} \"#{l.strip}\""
+          end
+          i += 1
+        }
         clines.close
       else abort("No Perfmon counters file named #{counters_file}.") end
       @pm = PerfmonMetrics.new
@@ -49,7 +67,8 @@ module PerfmonAgent
       else 
         perf_threads = []
         @counters.each { |c| perf_threads << Thread.new(c) { |cthread|
-            perf_input = `typeperf \"#{cthread}\" #{@typeperf_string}`
+      # puts("This thread running: typeperf #{cthread} #{@typeperf_string}")
+      perf_input = `typeperf #{cthread} #{@typeperf_string}`
             if !perf_input.include? @pm.typeperf_error_msg then get_perf_data(perf_input.split("\n"))
             elsif self.debug then puts("This path has no valid counters: #{cthread}") end
         } }
@@ -59,7 +78,6 @@ module PerfmonAgent
 
     private
     
-  
     def get_perf_data(perf_input)
       perf_lines = Array.new  
       perf_input.each { |pl| if pl.chr.eql?("\"") 
