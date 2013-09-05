@@ -58,10 +58,29 @@ Instructions for running the Plugin
 8. Execute `perfmon_plugins_multithread.rb` at command-line
 9. Go back to the Plugins list, after a brief period you will see an entry called 'Perfmon'
 
+Collecting Custom Perfmon Counters 
+--------------------
+
+Out-of-the-box, we have collected a set of Perfmon counters and dashboards that pertain to .NET applications. 
+If you would like to collect your own counters, you can do so via config files in the Standalone agent, like so:
+
+1. Create a new perfmon counters text file in the "config" directory
+	* You can use the existing perfmon_totals_counters.txt file as an example
+	* Use one Perfmon counter expression per line - the wildcards are as permitted by the "typeperf" command in Windows.
+2. Edit your newrelic_config.yml file as follows:
+	* Uncomment "guid" and set to your own GUID
+	* Uncomment "countersfile" and set to the list of perfmon counters text file.
+3. Follow the instructions above - **Instructions for running the Plugin**
+	* The agent will appear in the UI under the new GUID name you defined.
+
+Note: You will need to create your own custom dashboards and summary alerts for the agent.
+https://newrelic.com/docs/plugin-dev/working-with-plugin-dashboards
+https://newrelic.com/docs/plugin-dev/creating-summary-metrics-for-plugins
+
 Forking the plugin / Making it your own
 --------------------
 
-We have created a few dashboards for you to use right out of the box.  However if you'd like to take this plugin and customize it for your own specific needs you can do the following:
+Beyond collecting new Perfmon counters, if you'd like to take this plugin and customize it for your own specific needs you can do the following:
 
 1. [Fork the repository](https://help.github.com/articles/fork-a-repo) | [Download the code](https://github.com/nickfloyd/newrelic-perfmon-plugin/archive/master.zip)
 2. Change the agent_guid found in `perfmon_plugins_multithread.rb` to your own custom GUID (see the [docs](https://newrelic.com/docs/plugin-dev/the-parts-of-a-plugin#guid) for more information)

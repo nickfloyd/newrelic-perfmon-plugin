@@ -13,7 +13,6 @@ module PerfmonAgent
     # Change the following agent_guid if you fork and use this as your own plugin
     # Visit https://newrelic.com/docs/plugin-dev/ for more information
     default_guid = "com.52projects.plugins.perfmon"
-    $num_threads = 5
     agent_version "0.0.2"
     
   # Allow GUID to be set in config file under "newrelic" stanza
@@ -37,15 +36,16 @@ module PerfmonAgent
     ENV['SSL_CERT_FILE'] = File.expand_path(File.dirname(__FILE__)) + "/config/cacert.pem"
     
     def setup_metrics
+      @pm = PerfmonMetrics.new
       countersfile = NewRelic::Plugin::Config.config.newrelic['countersfile'].to_s
       if countersfile.to_s.empty? then counters_file = File.expand_path(File.dirname(__FILE__)) + "/config/perfmon_totals_counters.txt"
       else counters_file =  File.expand_path(File.dirname(__FILE__)) + "/config/#{countersfile}" end
       if File.file?(counters_file)
         i = 0
-        @counters = Array.new($num_threads, "")
+        @counters = Array.new(@pm.thread_count, "")
         clines = File.open(counters_file, "r")
         clines.each { |l|
-          j = i % $num_threads
+          j = i % @pm.thread_count
           if !l.chr.eql?("#") && !l.chr.eql?("\n") 
             @counters[j] = "#{@counters[j]} \"#{l.strip}\""
           end
@@ -53,7 +53,6 @@ module PerfmonAgent
         }
         clines.close
       else abort("No Perfmon counters file named #{counters_file}.") end
-      @pm = PerfmonMetrics.new
       if !self.local then @typeperf_string = "-s #{self.hostname} -sc #{@pm.metric_samples}"
       else @typeperf_string = "-sc #{@pm.metric_samples}" end
     end

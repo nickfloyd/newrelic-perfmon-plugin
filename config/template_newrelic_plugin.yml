@@ -1,33 +1,56 @@
-# Please make sure to update the license_key information with the license key for your New Relic
-# account.
+### New Relic Perfmon Plugin
+### Plugin (global) Configuration 
+#
+# Please make sure to update the license_key information 
+# with the license key for your New Relic account.
 #
 newrelic:
-  #
+  ### License Key
   # Update with your New Relic account license key:
   #
   license_key: 'your_license_key_here'
   #
+  ### Verbose Output
   # Set to '1' for verbose output, remove for normal output.
   # All output goes to stdout/stderr.
   #
   # verbose: 1
   #
-  # To collect a customized set of Perfmon counters (BOTH steps are REQUIRED):
-  # (1) Uncomment "guid" and set to your own GUID
-  # (2) Uncomment "countersfile" and set to the list of perfmon counters you wish to collect
+  ### Proxy Configuration
+  # Uncomment and set if using a proxy:
+  #
+  #proxy:
+  #  address: yourproxyhost
+  #  port: 8080
+  #  user: youruser
+  #  password: yourpass
+  #
+  ### Custom Perfmon Counters
+  # BOTH steps are REQUIRED:
+  # 1. Uncomment "guid" and set to your own GUID
+  # 2. Uncomment "countersfile" and set to the 
+  #    list of perfmon counters you wish to collect
   #
   # guid: com.not52projects.myown.plugin.perfmon
-  # countersfile: perfmon_counters.txt
+  # countersfile: perfmon_totals_counters.txt
+
 #
-# Agent Configuration:
+### Agent (Instance) Configuration:
+# To monitor multiple instances, create a new stanza 
+# (starting with "-" as seen below) for each one.
 #
 agents:
   perfmon:
       -
         local: yes
         hostname: your_server_name_here
-        # Set "debug: true" to see metrics in stdout instead of sent to New Relic"
+        # Set "debug: true" to see metrics in stdout instead of sent to New Relic
         debug: false
-        # Set "testrun: true" to use input from local text/html files. Only parses input once, then quits.
+        # Set "testrun: true" to use input from local text/html files. 
+        # Only parses input once, then quits.
         testrun: false
-        
+      #-
+        # local: no
+        # hostname: multiple_instance_example
+        # debug: false
+        # testrun: false
