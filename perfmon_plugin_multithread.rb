@@ -31,16 +31,30 @@ module PerfmonAgent
     end
   end
   
+  #  Returns true if there is an environment variable with the given name.
+    
     # Fixes SSL Connection Error in Windows execution of Ruby
     # Based on fix found at: https://gist.github.com/fnichol/867550
     ENV['SSL_CERT_FILE'] = File.expand_path(File.dirname(__FILE__)) + "/config/cacert.pem"
-    
+
+  
     def setup_metrics
+      if ENV.key?('OCRA_EXECUTABLE')
+        fileloc = File.dirname(ENV['OCRA_EXECUTABLE'].gsub(/\\/, "/"))
+      else
+        fileloc = File.expand_path(File.dirname(__FILE__))
+      end
+    
       @pm = PerfmonMetrics.new
       countersfile = NewRelic::Plugin::Config.config.newrelic['countersfile'].to_s
-      if countersfile.to_s.empty? then counters_file = File.expand_path(File.dirname(__FILE__)) + "/config/perfmon_totals_counters.txt"
-      else counters_file =  File.expand_path(File.dirname(__FILE__)) + "/config/#{countersfile}" end
+      if countersfile.to_s.empty? 
+        counters_file = File.expand_path(File.dirname(__FILE__)) + "/config/perfmon_totals_counters.txt"
+      else 
+        counters_file =  fileloc + "/config/#{countersfile}" 
+      end
+    
       if File.file?(counters_file)
+        puts("Using Counters File: #{counters_file}")
         i = 0
         @counters = Array.new(@pm.thread_count, "")
         clines = File.open(counters_file, "r")
@@ -52,9 +66,15 @@ module PerfmonAgent
           i += 1
         }
         clines.close
-      else abort("No Perfmon counters file named #{counters_file}.") end
-      if !self.local then @typeperf_string = "-s #{self.hostname} -sc #{@pm.metric_samples}"
-      else @typeperf_string = "-sc #{@pm.metric_samples}" end
+      else 
+        abort("No Perfmon counters file named #{counters_file}.")
+      end
+        
+      if !self.local 
+        @typeperf_string = "-s #{self.hostname} -sc #{@pm.metric_samples}"
+      else 
+        @typeperf_string = "-sc #{@pm.metric_samples}" 
+      end
     end
     
     def poll_cycle
@@ -68,8 +88,11 @@ module PerfmonAgent
         @counters.each { |c| perf_threads << Thread.new(c) { |cthread|
       # puts("This thread running: typeperf #{cthread} #{@typeperf_string}")
       perf_input = `typeperf #{cthread} #{@typeperf_string}`
-            if !perf_input.include? @pm.typeperf_error_msg then get_perf_data(perf_input.split("\n"))
-            elsif self.debug then puts("This path has no valid counters: #{cthread}") end
+            if !perf_input.include? @pm.typeperf_error_msg 
+        get_perf_data(perf_input.split("\n"))
+            elsif self.debug 
+        puts("This path has no valid counters: #{cthread}") 
+      end
         } }
         perf_threads.each { |t| t.join }
       end
