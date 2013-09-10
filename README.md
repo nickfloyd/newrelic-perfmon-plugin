@@ -70,12 +70,12 @@ If you would like to collect your own counters, you can do so via config files i
 2. Edit your newrelic_config.yml file as follows:
 	* Uncomment "guid" and set to your own GUID
 	* Uncomment "countersfile" and set to the list of perfmon counters text file.
-3. Follow the instructions above - **Instructions for running the Plugin**
+3. Follow the instructions above - [Instructions for running the Plugin](README.md#instructions-for-running-the-plugin)
 	* The agent will appear in the UI under the new GUID name you defined.
 
 Note: You will need to create your own custom dashboards and summary alerts for the agent.
-https://newrelic.com/docs/plugin-dev/working-with-plugin-dashboards
-https://newrelic.com/docs/plugin-dev/creating-summary-metrics-for-plugins
+* https://newrelic.com/docs/plugin-dev/working-with-plugin-dashboards
+* https://newrelic.com/docs/plugin-dev/creating-summary-metrics-for-plugins
 
 Forking the plugin / Making it your own
 --------------------
@@ -84,7 +84,7 @@ Beyond collecting new Perfmon counters, if you'd like to take this plugin and cu
 
 1. [Fork the repository](https://help.github.com/articles/fork-a-repo) | [Download the code](https://github.com/nickfloyd/newrelic-perfmon-plugin/archive/master.zip)
 2. Change the agent_guid found in `perfmon_plugins_multithread.rb` to your own custom GUID (see the [docs](https://newrelic.com/docs/plugin-dev/the-parts-of-a-plugin#guid) for more information)
-3. Follow the instructions above - **Instructions for running the Plugin**
+3. Follow the instructions above - [Instructions for running the Plugin](README.md#instructions-for-running-the-plugin)
 
 Notes / Tips
 --------------------
