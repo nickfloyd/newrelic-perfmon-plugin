@@ -4,6 +4,9 @@ require "bundler/setup"
 require "newrelic_plugin"
 require_relative "perfmon_metrics.rb"
 
+# Fixes SSL cert without monkeying with PEM file!
+require "certified"
+
 module PerfmonAgent
 
   class Agent < NewRelic::Plugin::Agent::Base
@@ -14,13 +17,13 @@ module PerfmonAgent
     # Visit https://newrelic.com/docs/plugin-dev/ for more information
     default_guid = "com.52projects.plugins.perfmon"
     agent_version "0.0.2"
-    
-  # Allow GUID to be set in config file under "newrelic" stanza
-  if NewRelic::Plugin::Config.config.newrelic['guid'].to_s.empty?
-    agent_guid default_guid
-  else
-    agent_guid NewRelic::Plugin::Config.config.newrelic['guid'].to_s
-  end
+   
+    # Allow GUID to be set in config file under "newrelic" stanza
+    if NewRelic::Plugin::Config.config.newrelic['guid'].to_s.empty?
+      agent_guid default_guid
+    else
+      agent_guid NewRelic::Plugin::Config.config.newrelic['guid'].to_s
+    end
   
   agent_human_labels('Perfmon') do 
     if hostname.to_s.empty?
@@ -35,8 +38,8 @@ module PerfmonAgent
     
     # Fixes SSL Connection Error in Windows execution of Ruby
     # Based on fix found at: https://gist.github.com/fnichol/867550
-    ENV['SSL_CERT_FILE'] = File.expand_path(File.dirname(__FILE__)) + "/config/cacert.pem"
-
+    # ENV['SSL_CERT_FILE'] = File.expand_path(File.dirname(__FILE__) + "/config/cacert.pem")
+	  # puts("CERT FILE: #{ENV['SSL_CERT_FILE']}")
   
     def setup_metrics
       if ENV.key?('OCRA_EXECUTABLE')
@@ -54,8 +57,10 @@ module PerfmonAgent
       end
     
       if File.file?(counters_file)
-        puts("Using Counters File: #{counters_file}")
-        i = 0
+        if !countersfile.to_s.empty? 
+			puts("Using Counters File: #{counters_file}")
+        end
+		i = 0
         @counters = Array.new(@pm.thread_count, "")
         clines = File.open(counters_file, "r")
         clines.each { |l|
@@ -114,9 +119,13 @@ module PerfmonAgent
     end
   
     def report_metric_check_debug(metricname, metrictype, metricvalue)
-      if self.debug then puts("#{metricname}[#{metrictype}] : #{metricvalue}")
-      else report_metric metricname, metrictype, metricvalue end
+      if self.debug 
+        puts("#{metricname}[#{metrictype}] : #{metricvalue}")
+      else 
+        report_metric metricname, metrictype, metricvalue 
+      end
     end
+    
   def thishost
     
   end
