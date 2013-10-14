@@ -42,12 +42,21 @@ module PerfmonAgent
 	  # puts("CERT FILE: #{ENV['SSL_CERT_FILE']}")
   
     def setup_metrics
+           
       if ENV.key?('OCRA_EXECUTABLE')
         fileloc = File.dirname(ENV['OCRA_EXECUTABLE'].gsub(/\\/, "/"))
       else
         fileloc = File.expand_path(File.dirname(__FILE__))
       end
-    
+      
+      pidfile = fileloc + "/ruby.pid"
+      
+      if File.exist?(pidfile)
+        File.delete(pidfile)
+      end
+      
+      File.open(pidfile, 'w') { |file| file.write("#{Process.pid}") }
+            
       @pm = PerfmonMetrics.new
       countersfile = NewRelic::Plugin::Config.config.newrelic['countersfile'].to_s
       if countersfile.to_s.empty? 
@@ -99,7 +108,12 @@ module PerfmonAgent
         puts("This path has no valid counters: #{cthread}") 
       end
         } }
-        perf_threads.each { |t| t.join }
+        perf_threads.each { |t| t.join 
+          Signal.trap("TERM") do
+             puts "Exiting..."
+             shutdown()
+          end
+        }
       end
     end
 
