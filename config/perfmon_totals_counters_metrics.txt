@@ -1,0 +1,249 @@
+## This file is PIPE (|) delimited!
+Read Operation Average Bytes|Bytes
+Write Operation Average Bytes|Bytes
+Logical IOPS|IOPS
+Logical Read IOPS|IOPS
+Logical Write IOPS|IOPS
+Logical Bytes Written/sec|Bytes
+Logical Bytes Read/sec|Bytes
+Logical Files Written/sec|files
+Logical Files Read/sec|files
+Read Failures %|%
+Write Failures %|%
+Seconds Running|Running
+Failing|Failing
+Usage Flush Seconds Remaining|Running
+Total Active Domains|Active
+Total Active Users|Active
+Authorizations/Request|Auth
+Resource Query Cache Hit Ratio|Ratio
+Resource Shadow Cache Hit Ratio|Ratio
+Resource Cache Hit Ratio|Ratio
+Resource List Cache Hit Ratio|Ratio
+Manifest Cache Hit Ratio|Ratio
+Manifest Data Cache Hit Ratio|Ratio
+Item Cache Hit Ratio|Ratio
+ItemList Cache Hit Ratio|Ratio
+Course Cache Hit Ratio|Ratio
+Seconds Running|Running
+Failing|Failing
+Requests Pending|Requests
+Requests/sec|Requests
+Requests Average Duration|Requests
+Connections Pending|Connections
+Connections/sec|Connections
+Connections Average Duration|Connections
+Control Bytes In/sec|Control
+Control Bytes Out/sec|Control
+Control Bytes/sec|Control
+Data Bytes In/sec|Data
+Data Bytes Out/sec|Data
+Data Bytes/sec|Data
+DLAP Operations Average Duration|Operations
+DLAP Operations/sec|Operations
+DLAP Operations Pending|Operations
+DLAP Failures/sec|Failures
+DLAP Timeouts/sec|Timeouts
+Active Connections|Connections
+Logins Attempted/sec|Logins
+Logins/sec|Logins
+Last Run Status|Logins
+Last Run Time|Logins
+Logins Attempted/sec|Logins
+Logins Failed %|Logins
+Login Failed Records|Logins
+Logins CAS/sec|Logins
+Logins SAML/sec|Logins
+Logins LiveId/sec|Logins
+Logins Hash/sec|Logins
+Logins Native/sec|Logins
+Logins Proxy/sec|Logins
+#\Memory\
+Page Faults/sec|Faults
+Available Bytes|Bytes
+Committed Bytes|Bytes
+Commit Limit|Limit
+Write Copies/sec|Writes
+Transition Faults/sec|Faults
+Cache Faults/sec|Faults
+Demand Zero Faults/sec|Faults
+Pages/sec|Pages
+Pages Input/sec|Pages
+Page Reads/sec|Pages
+Pages Output/sec|Pages
+Pool Paged Bytes|Pool
+Pool Nonpaged Bytes|Pool
+Page Writes/sec|Page
+Pool Paged Allocs|Pool
+Pool Nonpaged Allocs|Pool
+Free System Page Table Entries|Entries
+Cache Bytes|Bytes
+Cache Bytes Peak|Bytes
+Pool Paged Resident Bytes|Bytes
+System Code Total Bytes|Bytes
+System Code Resident Bytes|Bytes
+System Driver Total Bytes|Bytes
+System Driver Resident Bytes|Bytes
+System Cache Resident Bytes|Bytes
+% Committed Bytes In Use|Bytes
+Available KBytes|KBytes
+Available MBytes|MBytes
+Transition Pages RePurposed/sec|Pages
+Free & Zero Page List Bytes|Bytes
+Modified Page List Bytes|Bytes
+Standby Cache Reserve Bytes|Bytes
+Standby Cache Normal Priority Bytes|Bytes
+Standby Cache Core Bytes|Bytes
+#\Agilix BH DLAP Servers (BrainHoney)(*)\
+DLAP Operations Average Duration|Duration
+DLAP Operations/sec|Operations
+DLAP Operations Pending|Operations
+Last Run Status|Status
+Last Run Time|Date
+#\Agilix BH (BrainHoney)\
+Seconds Running|Running
+Failing|Failing
+Requests Pending|Requests
+Requests/sec|Requests
+Requests Average Duration|Requests
+Requests Slow %|%
+Requests Slow/sec|Requests
+Bytes In/sec|Bytes
+Bytes Out/sec|Bytes
+Bytes Total/sec|Bytes
+Login Operations Average Duration|Login
+Login Operations/sec|Login
+Login Operations Pending|Login
+Page Requests Average Duration|Page
+Page Requests/sec|Page
+Page Requests Slow %|Page
+Page Requests Slow/sec|Page
+StreamOut Requests Average Duration|StreamOut
+StreamOut Requests/sec|StreamOut
+StreamOut Requests Pending|StreamOut
+StreamIn Requests Average Duration|StreamOut
+StreamIn Requests/sec|StreamOut
+StreamIn Requests Pending|StreamOut
+Temp Streams|Temp
+Temp Streams/sec|Temp
+Temp Streams In Memory|Temp
+Temp Streams On Disk|Temp
+Temp Stream KiloBytes|KBytes
+Temp Stream KiloBytes In Memory|KBytes
+Temp Stream KiloBytes On Disk|KBytes
+Temp Stream Bytes/sec|Bytes
+Temp Stream Memory Bytes/sec|Bytes
+Temp Stream Disk Bytes/sec|Bytes
+#\Agilix DLAP Resource Volumes (DLAP)(*)\
+Read Requests/sec|Requests
+Write Requests/sec|Requests
+Invisible Connect Failures %|%
+Invisible Read Failures %|%
+Invisible Write Failures %|%
+Invisible Failures %|%
+#\Agilix DLAP Resources (DLAP)\
+Write Failures %|%
+Category Mismatches/sec|Mismatches
+Bytes Written/sec|Bytes
+Bytes Read/sec|Bytes
+#\Agilix DLAP Status Tests (DLAP)(*)\
+Last Run Status|Status
+Last Run Time|Date
+#\Agilix DLAP Temp Streams (DLAP)\
+Temp Streams|Streams
+Temp Streams/sec|Streams
+Temp Streams In Memory|Streams
+Temp Streams On Disk|Streams
+Temp Stream KiloBytes|KBytes
+Temp Stream KiloBytes In Memory|KBytes
+Temp Stream KiloBytes On Disk|KBytes
+Temp Stream Bytes/sec|Bytes
+Temp Stream Memory Bytes/sec|Bytes
+Temp Stream Disk Bytes/sec|Bytes
+#\Agilix DLAP Threading (DLAP)(*)\
+Worker Pool Invocations/sec|Worker
+Worker Pool Invocations|Worker
+Worker Pool Pending Invocations|Worker
+Worker Pool Workers Created/sec|Worker
+Worker Pool Workers Retired/sec|Worker
+Worker Pool Synchronous Executions/sec|Worker
+Worker Pool Workers|Worker
+Worker Pool Busy Workers|Worker
+Worker Pool Workers High Water Mark|Worker
+Worker Pool Average Invocation Time|Worker
+Worker Pool Slowest Invocation Milliseconds|Worker
+#\Agilix DLAP Utilization (DLAP)(*)\
+Access Denied Exceptions/sec|Exceptions
+No Authentication Exceptions/sec|Exceptions
+Concurrent Total Users|Users
+Concurrent Active Users|Users
+Concurrent Streaming Users|Users
+StreamOut Requests Average Duration|StreamOut
+StreamOut Requests/sec|StreamOut
+StreamOut Requests Aborted/sec|StreamOut
+StreamOut Requests Pending|StreamOut
+StreamIn Requests Average Duration|StreamIn
+StreamIn Requests/sec|StreamIn
+StreamIn Requests Aborted/sec|StreamIn
+StreamIn Requests Pending|StreamIn
+Stream Bytes In/sec|Bytes
+Stream Bytes Out/sec|Bytes
+Stream Bytes Total/sec|Bytes
+Requests Pending|Requests
+Requests/sec|Requests
+Requests Aborted/sec|Requests
+Requests Average Duration|Requests
+Requests Slow %|%
+Requests Slow/sec|Requests
+Bytes In/sec|Bytes
+Bytes Out/sec|Bytes
+Bytes Total/sec|Bytes
+Responses Failed %|Responses
+Responses Not Ok %|Responses
+Responses Other %|Responses
+SQL Operations Average Duration|Operations
+SQL Operations/sec|Operations
+SQL Operations Pending|Operations
+SQL Timeouts/sec|Timeouts
+Cache Operations Average Duration|Operations
+Cache Operations/sec|Operations
+Cache Operations Pending|Operations
+Cache Timeouts/sec|Timeouts
+Search Operations Average Duration|Operations
+Search Operations/sec|Operations
+Search Operations Pending|Operations
+Search Timeouts/sec|Timeouts
+Email Operations Average Duration|Operations
+Email Operations/sec|Operations
+Email Operations Pending|Operations
+Email Recipient Failures/sec|Operations
+Email Server Failures/sec|Failures
+SendWait Operations Average Duration|Operations
+SendWait Operations/sec|Operations
+SendWait Operations Pending|Operations
+ReceiveWait Operations Average Duration|Operations
+ReceiveWait Operations/sec|Operations
+ReceiveWait Operations Pending|Operations
+Reports Average Duration|Reports
+Reports/sec|Reports
+Reports Pending|Reports
+Report Timeouts/sec|Reports
+Assessments/sec|Assessments
+Assessments Items/sec|Assessments
+Adaptive Requests Average Duration|Requests
+Adaptive Requests/sec|Requests
+Adaptive Requests Pending|Requests
+Adaptive Requests Failures/sec|Requests
+Custom Question Average Duration|Questions
+Custom Questions/sec|Questions
+Custom Questions Pending|Questions
+Custom Question Failures/sec|Questions
+File Read Operations Average Duration|Operations
+File Read Operations/sec|Operations
+File Read Operations Pending|Operations
+File Write Operations Average Duration|Operations
+File Write Operations/sec|Operations
+File Write Operations Pending|Operations
+File Operations Average Duration|Operations
+File Operations/sec|Operations
+File Operations Pending|Operations
