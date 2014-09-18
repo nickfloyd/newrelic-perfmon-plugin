@@ -16,15 +16,16 @@ module PerfmonAgent
     # Change the following agent_guid if you fork and use this as your own plugin
     # Visit https://newrelic.com/docs/plugin-dev/ for more information
     default_guid = "com.52projects.plugins.perfmon"
-    agent_version "0.0.2"
+    agent_version "0.0.3"
    
     # Allow GUID to be set in config file under "newrelic" stanza
-    if NewRelic::Plugin::Config.config.newrelic['guid'].to_s.empty?
-      agent_guid default_guid
-    else
-      agent_guid NewRelic::Plugin::Config.config.newrelic['guid'].to_s
-    end
-  
+	if NewRelic::Plugin::Config.config.newrelic['guid'].to_s.empty?
+	  agent_guid default_guid
+	else
+	  agent_guid NewRelic::Plugin::Config.config.newrelic['guid'].to_s
+	  #puts("Using custom GUID: #{NewRelic::Plugin::Config.config.newrelic['guid'].to_s}") 
+	end
+
   agent_human_labels('Perfmon') do 
     if hostname.to_s.empty?
       if local then "#{Socket.gethostname}"
@@ -67,8 +68,9 @@ module PerfmonAgent
     
       if File.file?(counters_file)
         if !countersfile.to_s.empty? 
-			puts("Using Counters File: #{counters_file}")
+			#puts("Using Counters File: #{counters_file}")
         end
+		
 		i = 0
         @counters = Array.new(@pm.thread_count, "")
         clines = File.open(counters_file, "r")
@@ -83,7 +85,27 @@ module PerfmonAgent
       else 
         abort("No Perfmon counters file named #{counters_file}.")
       end
-        
+      
+	  #Pulling in custom metrics file and adding it to metric_types
+	  metricsfile = NewRelic::Plugin::Config.config.newrelic['metricsfile'].to_s
+	  if metricsfile.to_s.empty? 
+        #puts "Using default Metrics built into service"
+	  else
+		metrics_file =  fileloc + "/config/#{metricsfile}" 
+		#puts "Using custom metrics file: #{metrics_file}"
+		
+		mlines = File.open(metrics_file, "r")
+		mlines.each { |l|
+			if !l.chr.eql?("#") && !l.chr.eql?("\n") #if comment or blank line skip it
+				l_array = l.split("|")
+				@pm.metric_types[l_array[0].to_s.strip] = l_array[1].to_s.strip
+			end
+		}
+		mlines.close
+		#puts @pm.metric_types
+	  end
+	  
+	  #Defining how many times typeperf runs - defult is 1
       if !self.local 
         @typeperf_string = "-s #{self.hostname} -sc #{@pm.metric_samples}"
       else 
